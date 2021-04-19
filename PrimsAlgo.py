@@ -18,39 +18,39 @@ def getNext(key,graph,doned):
 
     target = 0
 
-    for value in graph.get(key):
+    if(type(graph.get(key) is not None)):
+        for value in graph.get(key):
 
-        if(min == 0 and value not in doned):
-            target = value
-            min = graph.get(key).get(value)
-        else:
-            if(graph.get(key).get(value) < min and value not in doned):
+            if(min == 0 and value not in doned):
                 target = value
                 min = graph.get(key).get(value)
+            else:
+                if(graph.get(key).get(value) < min and value not in doned):
+                    target = value
+                    min = graph.get(key).get(value)
 
     doned.append(target)
     return target
 
-def recursiveSpan(graph, root,MST, done):
+def recursiveSpan(graph, root,MST, done,FIN):
     while len(graph) > len(done):
-
-        MST[root] = getNext(root,graph,done)
-        print(dict(MST))
-        print((done))
+        value = getNext(root,graph,done)
+        add = set()
+        add.add(value)
+        MST[root] = value
+        FIN[root] = add
         if root not in done:
             done.append(root)
-        recursiveSpan(graph,MST.get(root),MST,done)
+        recursiveSpan(graph,MST.get(root),MST,done,FIN)
 
 
 
 def create_spanning_tree(graph,root):
     MST = {}
-
+    FIN = {}
     done = []
-    recursiveSpan(graph,root,MST,done)
-    print(MST)
-
-
+    recursiveSpan(graph,root,MST,done,FIN)
+    return ((FIN))
 
 
 
