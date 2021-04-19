@@ -31,8 +31,6 @@ def getNext(key,graph,doned):
     doned.append(target)
     return target
 
-recursiveFlag = False
-
 def recursiveSpan(graph, root,MST, done):
     while len(graph) > len(done):
 
@@ -52,8 +50,6 @@ def create_spanning_tree(graph,root):
     recursiveSpan(graph,root,MST,done)
     print(MST)
 
-
-create_spanning_tree(test_graph,'D')
 
 
 
